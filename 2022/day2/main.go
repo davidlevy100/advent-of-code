@@ -1,11 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
+
+	util "github.com/davidlevy100/advent-of-code/util"
 )
 
 var winner = map[string]string{
@@ -29,23 +31,11 @@ var scores = map[string]int{
 	"Z": 3,
 }
 
-var scoresRev = map[int]string{
-	1: "A",
-	2: "B",
-	3: "C",
-}
-
-var names = map[string]string{
-	"A": "Rock",
-	"B": "Paper",
-	"C": "Scissors",
-	"X": "Rock",
-	"Y": "Paper",
-	"Z": "Scissors",
-}
-
 func main() {
-	lines, err := getInput()
+	path, _ := os.Getwd()
+	fullPath := filepath.Join(path, "input.txt")
+
+	lines, err := util.GetInput(fullPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -99,28 +89,4 @@ func getScore(a, b string) int {
 	}
 
 	return result
-}
-
-func getInput() ([]string, error) {
-
-	f, err := os.Open("input.txt")
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer f.Close()
-
-	scanner := bufio.NewScanner(f)
-
-	lines := []string{}
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-	return lines, nil
 }

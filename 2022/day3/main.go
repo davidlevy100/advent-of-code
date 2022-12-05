@@ -1,15 +1,20 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
+
+	util "github.com/davidlevy100/advent-of-code/util"
 )
 
 func main() {
 
-	lines, err := getInput()
+	path, _ := os.Getwd()
+	fullPath := filepath.Join(path, "input.txt")
+
+	lines, err := util.GetInput(fullPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -53,28 +58,4 @@ func getScore(s string, m map[rune]int) int {
 	}
 
 	return result
-}
-
-func getInput() ([]string, error) {
-
-	f, err := os.Open("input.txt")
-
-	if err != nil {
-		return nil, err
-	}
-
-	defer f.Close()
-
-	scanner := bufio.NewScanner(f)
-
-	lines := []string{}
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-	return lines, nil
 }

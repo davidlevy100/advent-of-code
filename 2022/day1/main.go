@@ -7,10 +7,10 @@ import (
 	"sort"
 	"strconv"
 
-	util "github.com/davidlevy100/advent-of-code/2022/util"
+	util "github.com/davidlevy100/advent-of-code/util"
 )
 
-func Day1() []string {
+func main() {
 
 	path, _ := os.Getwd()
 	fullPath := filepath.Join(path, "input.txt")
@@ -51,9 +51,7 @@ func Day1() []string {
 		total += val
 	}
 
-	part1 := fmt.Sprintf("Part 1 answer: %d\n", scores[len(scores)-1])
-	part2 := fmt.Sprintf("Part 2 answer: %d\n", total)
-
-	return []string{part1, part2}
+	fmt.Printf("Part 1 answer: %d\n", scores[len(scores)-1])
+	fmt.Printf("Part 2 answer: %d\n", total)
 
 }
