@@ -15,7 +15,14 @@ func main() {
 	path, _ := os.Getwd()
 	fullPath := filepath.Join(path, "input.txt")
 
-	lines, _ := util.GetInput(fullPath)
+	data, _ := util.GetInput(fullPath)
+
+	fmt.Printf("Part 1 answer: %d\n", part1(data))
+	fmt.Printf("Part 2 answer: %d\n", part2(data))
+
+}
+
+func compile(data []string) []int {
 
 	currElf := 0
 	maxElfScore := 0
@@ -23,7 +30,7 @@ func main() {
 
 	scores := []int{}
 
-	for _, thisLine := range lines {
+	for _, thisLine := range data {
 
 		if thisLine == "" {
 
@@ -43,15 +50,36 @@ func main() {
 
 	scores = append(scores, currScore)
 
-	sort.Ints(scores)
+	return scores
 
-	total := 0
+}
 
-	for _, val := range scores[(len(scores) - 3):] {
-		total += val
+func part1(data []string) int {
+
+	var result int
+
+	scores := compile(data)
+
+	for _, val := range scores {
+		if val > result {
+			result = val
+		}
 	}
 
-	fmt.Printf("Part 1 answer: %d\n", scores[len(scores)-1])
-	fmt.Printf("Part 2 answer: %d\n", total)
+	return result
+}
 
+func part2(data []string) int {
+
+	var result int
+
+	scores := compile(data)
+
+	sort.Ints(scores)
+
+	for _, val := range scores[(len(scores) - 3):] {
+		result += val
+	}
+
+	return result
 }

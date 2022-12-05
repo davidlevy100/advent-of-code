@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-
 	path, _ := os.Getwd()
 	fullPath := filepath.Join(path, "input.txt")
 
@@ -19,6 +18,13 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Printf("\nPart 1 answer: %d\n", part1(lines))
+	fmt.Printf("\nPart 2 answer: %d\n", part2(lines))
+}
+
+func part1(data []string) int {
+
+	var result int
 	var letterScore = make(map[rune]int)
 
 	val := 1
@@ -31,14 +37,19 @@ func main() {
 		val++
 	}
 
-	var partOneResult int
-
-	for _, thisWord := range lines {
-		partOneResult += getScore(thisWord, letterScore)
+	for _, thisWord := range data {
+		result += getScore(thisWord, letterScore)
 	}
 
-	fmt.Printf("\nPart 1 answer: %d\n", partOneResult)
+	return result
 
+}
+
+func part2(data []string) int {
+
+	var result int
+
+	return result
 }
 
 func getScore(s string, m map[rune]int) int {

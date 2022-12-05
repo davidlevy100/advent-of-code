@@ -40,25 +40,35 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var partOneResult int
+	fmt.Printf("\nPart 1 answer: %d\n", part1(lines))
+	fmt.Printf("\nPart 2 answer: %d\n", part2(lines))
+}
 
-	for _, thisLine := range lines {
+func part1(data []string) int {
+
+	var result int
+
+	for _, thisLine := range data {
 		plays := strings.Fields(thisLine)
 		score := getScore(plays[0], plays[1])
-		partOneResult += score
+		result += score
 	}
 
-	fmt.Printf("\nPart 1 answer: %d\n", partOneResult)
+	return result
 
-	var partTwoResult int
+}
 
-	for _, thisLine := range lines {
+func part2(data []string) int {
+	var result int
+
+	for _, thisLine := range data {
 		plays := strings.Fields(thisLine)
 		score := choosePlay(plays[0], plays[1])
-		partTwoResult += score
+		result += score
 	}
 
-	fmt.Printf("\nPart 2 answer: %d\n", partTwoResult)
+	return result
+
 }
 
 func choosePlay(a, b string) int {
