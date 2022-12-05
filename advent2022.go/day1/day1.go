@@ -1,38 +1,21 @@
-package main
+package advent2022
 
 import (
-	"bufio"
 	"fmt"
-	"log"
 	"os"
+	"path/filepath"
 	"sort"
 	"strconv"
 )
 
-func main() {
+func Day1() []string {
 
-	f, err := os.Open("input.txt")
+	path, _ := os.Getwd()
+	fullPath := filepath.Join(path, "input.txt")
 
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	defer f.Close()
-
-	scanner := bufio.NewScanner(f)
-
-	lines := []string{}
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
+	lines, _, := GetInput(fullPath)
 
 	currElf := 0
-	//maxElf := 0
 	maxElfScore := 0
 	currScore := 0
 
@@ -46,7 +29,6 @@ func main() {
 
 			if currScore > maxElfScore {
 				maxElfScore = currScore
-				//maxElf = currElf
 			}
 			currElf++
 			currScore = 0
@@ -67,7 +49,9 @@ func main() {
 		total += val
 	}
 
-	fmt.Printf("Part A answer: %d\n", scores[len(scores)-1])
-	fmt.Printf("Part B answer: %d\n", total)
+	part1 := fmt.Sprintf("Part 1 answer: %d\n", scores[len(scores)-1])
+	part2 := fmt.Sprintf("Part 2 answer: %d\n", total)
+
+	return []string{part1, part2}
 
 }
