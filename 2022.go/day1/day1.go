@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"sort"
 	"strconv"
+
+	advent2022 "github.com/davidlevy100/advent-of-code/advent2022/textreader"
 )
 
 func Day1() []string {
@@ -13,7 +15,7 @@ func Day1() []string {
 	path, _ := os.Getwd()
 	fullPath := filepath.Join(path, "input.txt")
 
-	lines, _, := GetInput(fullPath)
+	lines, _ := advent2022.GetInput(fullPath)
 
 	currElf := 0
 	maxElfScore := 0
