@@ -2,43 +2,27 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"path/filepath"
 
 	util "github.com/davidlevy100/advent-of-code/util"
 )
 
 func main() {
-	path, _ := os.Getwd()
-	fullPath := filepath.Join(path, "input.txt")
 
-	lines, err := util.GetInput(fullPath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	data, _ := util.GetInput("input.txt")
 
-	fmt.Printf("\nPart 1 answer: %d\n", part1(lines))
-	fmt.Printf("\nPart 2 answer: %d\n", part2(lines))
+	fmt.Printf("Part 1 answer: %d\n", part1(data))
+	fmt.Printf("Part 2 answer: %d\n", part2(data))
+
 }
 
 func part1(data []string) int {
 
 	var result int
-	var letterScore = make(map[rune]int)
 
-	val := 1
-	for thisRune := 'a'; thisRune <= 'z'; thisRune++ {
-		letterScore[thisRune] = val
-		val++
-	}
-	for thisRune := 'A'; thisRune <= 'Z'; thisRune++ {
-		letterScore[thisRune] = val
-		val++
-	}
+	letterScores := scoreMap()
 
 	for _, thisWord := range data {
-		result += getScore(thisWord, letterScore)
+		result += getScore(thisWord, letterScores)
 	}
 
 	return result
@@ -49,7 +33,14 @@ func part2(data []string) int {
 
 	var result int
 
+	letterScores := scoreMap()
+
+	for i := 0; i < len(data)-2; i += 3 {
+		result += badges(data[i:i+3], letterScores)
+	}
+
 	return result
+
 }
 
 func getScore(s string, m map[rune]int) int {
@@ -65,6 +56,59 @@ func getScore(s string, m map[rune]int) int {
 		if runemap[thisRune] {
 			result += m[thisRune]
 			break
+		}
+	}
+
+	return result
+}
+
+func scoreMap() map[rune]int {
+
+	var result = make(map[rune]int)
+
+	val := 1
+	for thisRune := 'a'; thisRune <= 'z'; thisRune++ {
+		result[thisRune] = val
+		val++
+	}
+	for thisRune := 'A'; thisRune <= 'Z'; thisRune++ {
+		result[thisRune] = val
+		val++
+	}
+
+	return result
+
+}
+
+func badges(data []string, scores map[rune]int) int {
+	var result int
+
+	var exists = struct{}{}
+
+	var sets = make([]map[rune]struct{}, 1)
+
+	for _, thisLine := range data {
+		thisSet := make(map[rune]struct{})
+
+		for _, thisRune := range thisLine {
+			thisSet[thisRune] = exists
+		}
+
+		sets = append(sets, thisSet)
+
+	}
+
+	var counts = make(map[rune]int)
+
+	for _, thisSet := range sets {
+		for key := range thisSet {
+			counts[key]++
+		}
+	}
+
+	for key, val := range counts {
+		if val == len(data) {
+			result += scores[key]
 		}
 	}
 

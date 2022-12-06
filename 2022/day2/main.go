@@ -2,9 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"path/filepath"
 	"strings"
 
 	util "github.com/davidlevy100/advent-of-code/util"
@@ -32,16 +29,12 @@ var scores = map[string]int{
 }
 
 func main() {
-	path, _ := os.Getwd()
-	fullPath := filepath.Join(path, "input.txt")
 
-	lines, err := util.GetInput(fullPath)
-	if err != nil {
-		log.Fatal(err)
-	}
+	data, _ := util.GetInput("input.txt")
 
-	fmt.Printf("\nPart 1 answer: %d\n", part1(lines))
-	fmt.Printf("\nPart 2 answer: %d\n", part2(lines))
+	fmt.Printf("Part 1 answer: %d\n", part1(data))
+	fmt.Printf("Part 2 answer: %d\n", part2(data))
+
 }
 
 func part1(data []string) int {

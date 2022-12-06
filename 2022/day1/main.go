@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 	"sort"
 	"strconv"
 
@@ -12,10 +10,7 @@ import (
 
 func main() {
 
-	path, _ := os.Getwd()
-	fullPath := filepath.Join(path, "input.txt")
-
-	data, _ := util.GetInput(fullPath)
+	data, _ := util.GetInput("input.txt")
 
 	fmt.Printf("Part 1 answer: %d\n", part1(data))
 	fmt.Printf("Part 2 answer: %d\n", part2(data))
