@@ -18,10 +18,10 @@ func TestPart1(t *testing.T) {
 	}
 
 	ans := Part1(data)
-	correct := 157
+	correct := []string{"C", "M", "Z"}
 
-	if ans != correct {
-		t.Errorf("Part 1 = %d, want %d", ans, correct)
+	if !stringSlicesEqual(ans, correct) {
+		t.Errorf("Part 1 = %v, want %v", ans, correct)
 	}
 
 }
@@ -34,10 +34,10 @@ func TestPart2(t *testing.T) {
 	}
 
 	ans := Part2(data)
-	correct := 70
+	correct := []string{"M", "C", "D"}
 
-	if ans != correct {
-		t.Errorf("Part 2 = %d, want %d", ans, correct)
+	if !stringSlicesEqual(ans, correct) {
+		t.Errorf("Part 2 = %v, want %v", ans, correct)
 	}
 
 }
@@ -66,4 +66,16 @@ func BenchmarkPart2(b *testing.B) {
 		Part2(data)
 	}
 
+}
+
+func stringSlicesEqual(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, v := range a {
+		if v != b[i] {
+			return false
+		}
+	}
+	return true
 }
