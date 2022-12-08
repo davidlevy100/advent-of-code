@@ -34,7 +34,7 @@ func TestPart2(t *testing.T) {
 	}
 
 	ans := Part2(data)
-	correct := 48
+	correct := 8
 
 	if ans != correct {
 		t.Errorf("Part 2 = %d, want %d", ans, correct)
