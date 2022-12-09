@@ -12,7 +12,34 @@ type coordinates struct {
 	x, y int
 }
 
+type rope struct {
+	head, tail *knot
+}
+
+func makeRope(length int) *rope {
+
+	head := newKnot()
+	var this = head
+	var tail *knot
+
+	for i := 1; i <= length; i++ {
+		prev := this
+		this.next = newKnot()
+		this = this.next
+		this.prev = prev
+
+		if i == length {
+			tail = this
+		}
+
+	}
+
+	return &rope{head: head, tail: tail}
+
+}
+
 type knot struct {
+	prev       *knot
 	next       *knot
 	position   coordinates
 	posHistory map[coordinates]int
@@ -46,12 +73,16 @@ func (k *knot) move(dir string) {
 		k.position.x++
 	}
 
-	k.posHistory[k.position]++
+	if k.next != nil {
+		k.next.follow()
+	} else {
+		k.posHistory[k.position]++
+	}
 }
 
-func (k *knot) follow(other *knot) {
-	xDiff := other.position.x - k.position.x
-	yDiff := other.position.y - k.position.y
+func (k *knot) follow() {
+	xDiff := k.prev.position.x - k.position.x
+	yDiff := k.prev.position.y - k.position.y
 
 	if abs(xDiff) > 1 || abs(yDiff) > 1 {
 
@@ -113,35 +144,16 @@ func simulation(data []string, length int) int {
 
 	var result int
 
-	head := newKnot()
-	var this = head
-	var tail *knot
-
-	for i := 1; i <= length; i++ {
-		this.next = newKnot()
-		this = this.next
-
-		if i == length {
-			tail = this
-		}
-
-	}
+	rope := makeRope(length)
 
 	for _, thisLine := range data {
 		dir, mag := parseCommand(thisLine)
 
 		for i := 0; i < mag; i++ {
-			head.move(dir)
-			prev, this := head, head
-
-			for this.next != nil {
-				this = this.next
-				this.follow(prev)
-				prev = prev.next
-			}
+			rope.head.move(dir)
 		}
 	}
-	result = len(tail.posHistory)
+	result = len(rope.tail.posHistory)
 
 	return result
 
