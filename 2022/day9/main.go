@@ -22,15 +22,15 @@ func makeRope(length int) *rope {
 
 	head := &knot{}
 	var this = head
-	var tail *knot
+	var tail = head
 
-	for i := 1; i <= length; i++ {
+	for i := 1; i < length; i++ {
 		prev := this
 		this.next = &knot{}
 		this = this.next
 		this.prev = prev
 
-		if i == length {
+		if i == length-1 {
 			tail = this
 		}
 	}
@@ -126,11 +126,11 @@ func main() {
 }
 
 func part1(data []string) int {
-	return simulation(data, 1)
+	return simulation(data, 2)
 }
 
 func part2(data []string) int {
-	return simulation(data, 9)
+	return simulation(data, 10)
 }
 
 func simulation(data []string, length int) int {
