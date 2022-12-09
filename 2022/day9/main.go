@@ -20,27 +20,25 @@ type rope struct {
 
 func makeRope(length int) *rope {
 
-	head := newKnot()
+	head := &knot{}
 	var this = head
 	var tail *knot
 
 	for i := 1; i <= length; i++ {
 		prev := this
-		this.next = newKnot()
+		this.next = &knot{}
 		this = this.next
 		this.prev = prev
 
 		if i == length {
 			tail = this
 		}
-
 	}
 
 	tail.posHistory = make(map[coordinates]exists)
 	tail.posHistory[coordinates{}] = exists{}
 
 	return &rope{head: head, tail: tail}
-
 }
 
 type knot struct {
@@ -48,12 +46,6 @@ type knot struct {
 	next       *knot
 	position   coordinates
 	posHistory map[coordinates]exists
-}
-
-func newKnot() *knot {
-	return &knot{
-		position: coordinates{0, 0},
-	}
 }
 
 func (k *knot) move(dir string) {
@@ -122,7 +114,6 @@ func abs(x int) int {
 	if x < 0 {
 		x *= -1
 	}
-
 	return x
 }
 
@@ -132,19 +123,14 @@ func main() {
 
 	fmt.Printf("Part 1 answer: %d\n", part1(data))
 	fmt.Printf("Part 2 answer: %d\n", part2(data))
-
 }
 
 func part1(data []string) int {
-
 	return simulation(data, 1)
-
 }
 
 func part2(data []string) int {
-
 	return simulation(data, 9)
-
 }
 
 func simulation(data []string, length int) int {
@@ -163,7 +149,6 @@ func simulation(data []string, length int) int {
 	result = len(rope.tail.posHistory)
 
 	return result
-
 }
 
 func parseCommand(s string) (string, int) {
@@ -177,5 +162,4 @@ func parseCommand(s string) (string, int) {
 	mag, _ = strconv.Atoi(inputs[1])
 
 	return dir, mag
-
 }
