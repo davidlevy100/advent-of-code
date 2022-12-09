@@ -34,6 +34,9 @@ func makeRope(length int) *rope {
 
 	}
 
+	tail.posHistory = make(map[coordinates]struct{})
+	tail.posHistory[coordinates{}] = struct{}{}
+
 	return &rope{head: head, tail: tail}
 
 }
@@ -47,8 +50,7 @@ type knot struct {
 
 func newKnot() *knot {
 	return &knot{
-		position:   coordinates{0, 0},
-		posHistory: map[coordinates]struct{}{{0, 0}: {}},
+		position: coordinates{0, 0},
 	}
 }
 
