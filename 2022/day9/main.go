@@ -8,6 +8,8 @@ import (
 	util "github.com/davidlevy100/advent-of-code/util"
 )
 
+type exists struct{}
+
 type coordinates struct {
 	x, y int
 }
@@ -34,8 +36,8 @@ func makeRope(length int) *rope {
 
 	}
 
-	tail.posHistory = make(map[coordinates]struct{})
-	tail.posHistory[coordinates{}] = struct{}{}
+	tail.posHistory = make(map[coordinates]exists)
+	tail.posHistory[coordinates{}] = exists{}
 
 	return &rope{head: head, tail: tail}
 
@@ -45,7 +47,7 @@ type knot struct {
 	prev       *knot
 	next       *knot
 	position   coordinates
-	posHistory map[coordinates]struct{}
+	posHistory map[coordinates]exists
 }
 
 func newKnot() *knot {
@@ -81,7 +83,7 @@ func (k *knot) move(dir string) {
 	if k.next != nil {
 		k.next.follow()
 	} else {
-		k.posHistory[k.position] = struct{}{}
+		k.posHistory[k.position] = exists{}
 	}
 }
 
