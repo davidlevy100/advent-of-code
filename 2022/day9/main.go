@@ -42,11 +42,14 @@ type knot struct {
 	prev       *knot
 	next       *knot
 	position   coordinates
-	posHistory map[coordinates]int
+	posHistory map[coordinates]struct{}
 }
 
 func newKnot() *knot {
-	return &knot{position: coordinates{0, 0}, posHistory: map[coordinates]int{{0, 0}: 1}}
+	return &knot{
+		position:   coordinates{0, 0},
+		posHistory: map[coordinates]struct{}{{0, 0}: {}},
+	}
 }
 
 func (k *knot) move(dir string) {
@@ -76,7 +79,7 @@ func (k *knot) move(dir string) {
 	if k.next != nil {
 		k.next.follow()
 	} else {
-		k.posHistory[k.position]++
+		k.posHistory[k.position] = struct{}{}
 	}
 }
 
