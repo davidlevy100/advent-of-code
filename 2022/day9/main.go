@@ -13,6 +13,7 @@ type coordinates struct {
 }
 
 type knot struct {
+	next       *knot
 	position   coordinates
 	posHistory map[coordinates]int
 }
@@ -98,30 +99,49 @@ func main() {
 
 func part1(data []string) int {
 
+	return simulation(data, 1)
+
+}
+
+func part2(data []string) int {
+
+	return simulation(data, 9)
+
+}
+
+func simulation(data []string, length int) int {
+
 	var result int
 
 	head := newKnot()
-	tail := newKnot()
+	var this = head
+	var tail *knot
+
+	for i := 1; i <= length; i++ {
+		this.next = newKnot()
+		this = this.next
+
+		if i == length {
+			tail = this
+		}
+
+	}
 
 	for _, thisLine := range data {
 		dir, mag := parseCommand(thisLine)
 
 		for i := 0; i < mag; i++ {
 			head.move(dir)
-			tail.follow(head)
+			prev, this := head, head
 
+			for this.next != nil {
+				this = this.next
+				this.follow(prev)
+				prev = prev.next
+			}
 		}
 	}
-
 	result = len(tail.posHistory)
-
-	return result
-
-}
-
-func part2(data []string) int {
-
-	var result int
 
 	return result
 

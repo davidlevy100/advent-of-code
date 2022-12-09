@@ -28,13 +28,13 @@ func TestPart1(t *testing.T) {
 
 func TestPart2(t *testing.T) {
 
-	data, err := util.GetInput("input_test.txt")
+	data, err := util.GetInput("input_test2.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	ans := Part2(data)
-	correct := 70
+	correct := 36
 
 	if ans != correct {
 		t.Errorf("Part 2 = %d, want %d", ans, correct)
