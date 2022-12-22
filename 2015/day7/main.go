@@ -65,6 +65,7 @@ func part2(data []string) int {
 	var result int
 
 	wires := make(map[string]uint16)
+	wires["b"] = 956
 	q := new(queue)
 
 	for _, line := range data {
@@ -77,7 +78,7 @@ func part2(data []string) int {
 
 	}
 
-	result = int(wires["b"])
+	result = int(wires["a"])
 
 	return result
 
@@ -106,11 +107,9 @@ func assign(ss []string, m map[string]uint16, q *queue) {
 			q.enqueue(ss)
 		} else {
 			m[key] = m[ss[0]]
-			fmt.Printf("%s(%d) -> %s(%d)\n", ss[0], val, key, m[key])
 		}
 	} else {
 		m[key] = uint16(val)
-		fmt.Printf("%d -> %s(%d)\n", val, key, m[key])
 	}
 }
 
@@ -159,8 +158,6 @@ func bitwise(ss []string, m map[string]uint16, q *queue) {
 		m[key] = op1 >> op2
 	}
 
-	fmt.Printf("%s(%d) %s %s(%d) -> %s(%d)\n", ss[0], op1, ss[1], ss[2], op2, key, m[key])
-
 }
 
 func complement(ss []string, m map[string]uint16, q *queue) {
@@ -181,7 +178,5 @@ func complement(ss []string, m map[string]uint16, q *queue) {
 	}
 
 	m[key] = ^op1
-
-	fmt.Printf("NOT %s(%d) -> %s(%d)\n", ss[1], op1, key, m[key])
 
 }
