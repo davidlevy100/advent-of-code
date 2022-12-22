@@ -31,9 +31,10 @@ func (q *queue) Len() int {
 func main() {
 
 	data, _ := util.GetInput("input.txt")
+	data2, _ := util.GetInput("input2.txt")
 
 	fmt.Printf("Part 1 answer: %d\n", part1(data))
-	fmt.Printf("Part 2 answer: %d\n", part2(data))
+	fmt.Printf("Part 2 answer: %d\n", part2(data2))
 
 }
 
@@ -51,7 +52,6 @@ func part1(data []string) int {
 
 	for q.Len() > 0 {
 		parseInput(q.dequeue(), wires, q)
-
 	}
 
 	result = int(wires["a"])
@@ -75,7 +75,6 @@ func part2(data []string) int {
 
 	for q.Len() > 0 {
 		parseInput(q.dequeue(), wires, q)
-
 	}
 
 	result = int(wires["a"])
