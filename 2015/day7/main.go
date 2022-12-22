@@ -31,10 +31,9 @@ func (q *queue) Len() int {
 func main() {
 
 	data, _ := util.GetInput("input.txt")
-	data2, _ := util.GetInput("input2.txt")
 
 	fmt.Printf("Part 1 answer: %d\n", part1(data))
-	fmt.Printf("Part 2 answer: %d\n", part2(data2))
+	fmt.Printf("Part 2 answer: %d\n", part2(data))
 
 }
 
@@ -99,6 +98,12 @@ func parseInput(msg []string, m map[string]uint16, q *queue) {
 func assign(ss []string, m map[string]uint16, q *queue) {
 
 	key := ss[2]
+
+	_, ok := m[key]
+	if ok {
+		return
+	}
+
 	val, err := strconv.ParseUint(ss[0], 10, 16)
 	if err != nil {
 		_, ok := m[ss[0]]
