@@ -64,7 +64,7 @@ func part2(data []string) int {
 	var result int
 
 	wires := make(map[string]uint16)
-	wires["b"] = 956
+	wires["b"] = uint16(part1(data))
 	q := new(queue)
 
 	for _, line := range data {
