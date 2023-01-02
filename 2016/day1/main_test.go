@@ -36,9 +36,7 @@ func TestPart2(t *testing.T) {
 		s    string
 		want int
 	}{
-		{"R2, L3", 5},
-		{"R2, R2, R2", 2},
-		{"R5, L5, R5, R3", 12},
+		{"R8, R4, R4, R8", 4},
 	}
 
 	for _, tt := range tests {
