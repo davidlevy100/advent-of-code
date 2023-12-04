@@ -72,6 +72,32 @@ func part2(data []string) int {
 
 	var result int
 
+	screen := makeScreen()
+
+	printScreen(screen)
+
 	return result
 
+}
+
+func makeScreen() [][]string {
+	var result [][]string = make([][]string, 6)
+
+	for i := range result {
+		result[i] = make([]string, 40)
+	}
+
+	for i := 0; i < 6; i++ {
+		for j := 0; j < 40; j++ {
+			result[i][j] = "."
+		}
+	}
+
+	return result
+}
+
+func printScreen(screen [][]string) {
+	for _, thisLine := range screen {
+		fmt.Println(thisLine)
+	}
 }
