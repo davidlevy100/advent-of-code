@@ -13,9 +13,8 @@ func TestPart1(t *testing.T) {
 		s    string
 		want int
 	}{
-		{"R2, L3", 5},
-		{"R2, R2, R2", 2},
-		{"R5, L5, R5, R3", 12},
+		{"abcdef", 609043},
+		{"pqrstuv", 1048970},
 	}
 
 	for _, tt := range tests {
@@ -36,9 +35,8 @@ func TestPart2(t *testing.T) {
 		s    string
 		want int
 	}{
-		{"R2, L3", 5},
-		{"R2, R2, R2", 2},
-		{"R5, L5, R5, R3", 12},
+		{"abcdef", 609043},
+		{"pqrstuv", 1048970},
 	}
 
 	for _, tt := range tests {
@@ -56,7 +54,7 @@ func TestPart2(t *testing.T) {
 func BenchmarkPart1(b *testing.B) {
 
 	for n := 0; n < b.N; n++ {
-		Part1("R2, L3")
+		Part1("abcdef")
 	}
 
 }
@@ -64,7 +62,7 @@ func BenchmarkPart1(b *testing.B) {
 func BenchmarkPart2(b *testing.B) {
 
 	for n := 0; n < b.N; n++ {
-		Part2("R2, L3")
+		Part2("abcdef")
 	}
 
 }
