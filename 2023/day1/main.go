@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strconv"
-	"unicode"
 
 	util "github.com/davidlevy100/advent-of-code/util"
 )
@@ -77,59 +76,81 @@ func part2(data []string) int {
 func getNum(line string) int {
 	var result int
 
-	nums := []int{}
+	first, last := 0, 0
 
-	for _, thisRune := range line {
-		if unicode.IsDigit(thisRune) {
-			val, _ := strconv.Atoi(string(thisRune))
-			nums = append(nums, val)
+	for i := 0; i < len(line); i++ {
+		if val, err := strconv.Atoi(string(line[i])); err == nil {
+			first = val
+			break
 		}
 	}
 
-	if len(nums) > 0 {
-		result = nums[0]*10 + nums[len(nums)-1]
+	for i := len(line) - 1; i >= 0; i-- {
+		if val, err := strconv.Atoi(string(line[i])); err == nil {
+			last = val
+			break
+		}
 	}
+
+	result = first*10 + last
 
 	return result
 }
 
 func getDigits(line string) int {
 
-	fmt.Println(line)
+	var result int = getFirstDigit(line)*10 + getLastDigit(line)
+	return result
+}
+
+func getFirstDigit(line string) int {
+
 	var result int
 
-	nums := []int{}
-
 	start := 0
-	var found bool
 
-	for start < len(line) {
-
-		if found {
-			start++
-			found = false
-		}
+FOR:
+	for ; start < len(line); start++ {
 
 		for key, val := range digits {
 			end := start + len(key)
-			if end < len(line) {
+			if end <= len(line) {
 				word := line[start:end]
-				fmt.Println(word, key)
 				if word == key {
-					nums = append(nums, val)
-					start += len(key) -1
-					found = true
-					break
+					result = val
+					break FOR
 				}
 			}
 		}
 
 	}
 
-	if len(nums) > 0 {
-		result = nums[0]*10 + nums[len(nums)-1]
+	return result
+
+}
+
+func getLastDigit(line string) int {
+
+	var result int
+
+	start := len(line) - 1
+
+FOR:
+	for ; start >= 0; start-- {
+
+		for key, val := range digits {
+			end := start + len(key)
+			if end <= len(line) {
+				word := line[start:end]
+				if word == key {
+					result = val
+					break FOR
+				}
+			}
+		}
+
 	}
-	fmt.Println(nums)
+
 	return result
 
 }

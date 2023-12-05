@@ -33,6 +33,12 @@ func part2(data []string) int {
 
 	var result int
 
+	for _, thisLine := range data {
+		if abaTest(thisLine) {
+			result++
+		}
+	}
+
 	return result
 
 }

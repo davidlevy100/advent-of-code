@@ -12,6 +12,8 @@ var Part2 = part2
 var IsABBA = isABBA
 var HasABBA = hasAbba
 var AbbaTest = abbaTest
+var IsABA = isABA
+var HasABA = hasAba
 
 func TestPart1(t *testing.T) {
 
@@ -31,13 +33,13 @@ func TestPart1(t *testing.T) {
 
 func TestPart2(t *testing.T) {
 
-	data, err := util.GetInput("input_test.txt")
+	data, err := util.GetInput("input_test2.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	ans := Part2(data)
-	correct := 4
+	correct := 2
 
 	if ans != correct {
 		t.Errorf("Part 2 = %d, want %d", ans, correct)
@@ -141,6 +143,58 @@ func TestAbbaTest(t *testing.T) {
 			ans := AbbaTest(tt.s)
 			if ans != tt.want {
 				t.Errorf("%s: got %v, want %v", testname, ans, tt.want)
+			}
+		})
+	}
+}
+
+func TestIsAba(t *testing.T) {
+
+	var tests = []struct {
+		s    string
+		want bool
+	}{
+		{"aba", true},
+		{"aaa", false}, // can't all be the same
+		{"mno", false},
+		{"qwe", false},
+		{"a", false}, // not 4 letters
+		{"xyx", true},
+	}
+
+	for _, tt := range tests {
+		testname := tt.s
+		t.Run(testname, func(t *testing.T) {
+			ans := IsABA(tt.s)
+			if ans != tt.want {
+				t.Errorf("got %v, want %v", ans, tt.want)
+			}
+		})
+	}
+}
+
+func TestHasAba(t *testing.T) {
+
+	var tests = []struct {
+		s     string
+		want  string
+		want2 bool
+	}{
+		{"aba", "aba", true},
+		{"aaaaaa", "", false}, // can't all be the same
+		{"habah", "aba", true},
+		{"lmnop", "", false},
+		{"qwer", "", false},
+		{"a", "", false}, //not 4 letters
+		{"zzzxyx", "xyx", true},
+	}
+
+	for _, tt := range tests {
+		testname := tt.s
+		t.Run(testname, func(t *testing.T) {
+			ans, ans2 := HasABA(tt.s)
+			if ans != tt.want || ans2 != tt.want2 {
+				t.Errorf("got (%s, %v), want (%s, %v)", ans, ans2, tt.want, tt.want2)
 			}
 		})
 	}
