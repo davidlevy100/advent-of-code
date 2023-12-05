@@ -42,6 +42,22 @@ func TestPart2(t *testing.T) {
 
 }
 
+func TestPart3(t *testing.T) {
+
+	data, err := util.GetInput("input_test3.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ans := Part2(data)
+	correct := 32
+
+	if ans != correct {
+		t.Errorf("Part 2 = %d, want %d", ans, correct)
+	}
+
+}
+
 func BenchmarkPart1(b *testing.B) {
 
 	data, err := util.GetInput("input_test.txt")

@@ -99,58 +99,46 @@ func getNum(line string) int {
 
 func getDigits(line string) int {
 
-	var result int = getFirstDigit(line)*10 + getLastDigit(line)
+	var result int
+
+	first, last := 0, 0
+
+	for i := 0; i < len(line); i++ {
+		if val, err := getValue(i, line); err == nil {
+			first = val
+			break
+		}
+	}
+
+	for i := len(line) - 1; i >= 0; i-- {
+		if val, err := getValue(i, line); err == nil {
+			last = val
+			break
+		}
+	}
+
+	result = first*10 + last
+
 	return result
 }
 
-func getFirstDigit(line string) int {
+func getValue(i int, line string) (int, error) {
 
 	var result int
+	var err error = fmt.Errorf("none found")
 
-	start := 0
-
-FOR:
-	for ; start < len(line); start++ {
-
-		for key, val := range digits {
-			end := start + len(key)
-			if end <= len(line) {
-				word := line[start:end]
-				if word == key {
-					result = val
-					break FOR
-				}
+	for key, val := range digits {
+		end := i + len(key)
+		if end <= len(line) {
+			word := line[i:end]
+			if word == key {
+				result = val
+				err = nil
+				break
 			}
 		}
-
 	}
 
-	return result
-
-}
-
-func getLastDigit(line string) int {
-
-	var result int
-
-	start := len(line) - 1
-
-FOR:
-	for ; start >= 0; start-- {
-
-		for key, val := range digits {
-			end := start + len(key)
-			if end <= len(line) {
-				word := line[start:end]
-				if word == key {
-					result = val
-					break FOR
-				}
-			}
-		}
-
-	}
-
-	return result
+	return result, err
 
 }
