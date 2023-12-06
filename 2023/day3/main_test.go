@@ -18,7 +18,7 @@ func TestPart1(t *testing.T) {
 	}
 
 	ans := Part1(data)
-	correct := 157
+	correct := 4361
 
 	if ans != correct {
 		t.Errorf("Part 1 = %d, want %d", ans, correct)
@@ -38,6 +38,54 @@ func TestPart2(t *testing.T) {
 
 	if ans != correct {
 		t.Errorf("Part 2 = %d, want %d", ans, correct)
+	}
+
+}
+
+func TestPart3(t *testing.T) {
+
+	data, err := util.GetInput("input_test2.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ans := Part1(data)
+	correct := 925
+
+	if ans != correct {
+		t.Errorf("Part 1 = %d, want %d", ans, correct)
+	}
+
+}
+
+func TestPart4(t *testing.T) {
+
+	data, err := util.GetInput("input_test3.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ans := Part1(data)
+	correct := 62
+
+	if ans != correct {
+		t.Errorf("Part 1 = %d, want %d", ans, correct)
+	}
+
+}
+
+func TestPart5(t *testing.T) {
+
+	data, err := util.GetInput("input_test4.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ans := Part1(data)
+	correct := 187
+
+	if ans != correct {
+		t.Errorf("Part 1 = %d, want %d", ans, correct)
 	}
 
 }
