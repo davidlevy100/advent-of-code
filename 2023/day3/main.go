@@ -8,8 +8,13 @@ import (
 	util "github.com/davidlevy100/advent-of-code/util"
 )
 
+type coords struct {
+	y, x int
+}
+
 type gears struct {
 	adjacent, nonadjacent []int
+	gearCoords            map[coords][]int
 }
 
 func main() {
@@ -26,8 +31,6 @@ func part1(data []string) int {
 	var result int
 
 	gearVals := parseData(data)
-
-	fmt.Println(gearVals)
 
 	for _, val := range gearVals.adjacent {
 		result += val
@@ -54,6 +57,8 @@ func parseData(data []string) gears {
 
 	var checkAdjacent = func(y, x int) bool {
 
+		var isAdjacent bool
+
 		for i := y - 1; i <= y+1; i++ {
 
 			if i < 0 || i >= maxY {
@@ -68,12 +73,15 @@ func parseData(data []string) gears {
 				if data[i][j] == '.' || unicode.IsDigit(rune(data[i][j])) {
 					continue
 				} else {
-					return true
+					isAdjacent = true
+					if data[i][j] == '*' {
+						result.gearCoords[coords{i, j}] = append(result.gearCoords[coords{i, j}])
+					}
 				}
 			}
 		}
 
-		return false
+		return isAdjacent
 
 	}
 
@@ -112,7 +120,7 @@ func parseData(data []string) gears {
 				if adjacent {
 					result.adjacent = append(result.adjacent, value)
 				} else {
-					result.adjacent = append(result.nonadjacent, value)
+					result.nonadjacent = append(result.nonadjacent, value)
 				}
 			}
 		}
