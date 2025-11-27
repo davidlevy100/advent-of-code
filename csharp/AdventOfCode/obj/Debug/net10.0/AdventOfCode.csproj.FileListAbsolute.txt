@@ -1,0 +1,15 @@
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\bin\Debug\net10.0\AdventOfCode.exe
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\bin\Debug\net10.0\AdventOfCode.deps.json
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\bin\Debug\net10.0\AdventOfCode.runtimeconfig.json
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\bin\Debug\net10.0\AdventOfCode.dll
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\bin\Debug\net10.0\AdventOfCode.pdb
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.AssemblyInfoInputs.cache
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.AssemblyInfo.cs
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.csproj.CoreCompileInputs.cache
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.sourcelink.json
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.dll
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\refint\AdventOfCode.dll
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.pdb
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\AdventOfCode.genruntimeconfig.cache
+C:\Users\david\git\advent-of-code\csharp\AdventOfCode\obj\Debug\net10.0\ref\AdventOfCode.dll

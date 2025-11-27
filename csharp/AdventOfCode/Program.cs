@@ -1,0 +1,12 @@
+﻿using Day01;
+using Day02;
+
+var day = new Day02Solution();
+
+// run test input first
+Console.WriteLine("=== TEST ===");
+day.Run("test.txt");
+
+// run real input
+Console.WriteLine("\n=== REAL ===");
+day.Run("input.txt");
