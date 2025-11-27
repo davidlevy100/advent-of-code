@@ -55,9 +55,10 @@ func parseData(data []string) gears {
 	var maxY = len(data)
 	var maxX = len(data[0])
 
-	var checkAdjacent = func(y, x int) bool {
+	var checkAdjacent = func(y, x int) (bool, []coords) {
 
 		var isAdjacent bool
+		var foundGears []coords
 
 		for i := y - 1; i <= y+1; i++ {
 
@@ -75,23 +76,25 @@ func parseData(data []string) gears {
 				} else {
 					isAdjacent = true
 					if data[i][j] == '*' {
-						result.gearCoords[coords{i, j}] = append(result.gearCoords[coords{i, j}])
+						foundGears = append(foundGears, coords{i, j})
 					}
 				}
 			}
 		}
 
-		return isAdjacent
+		return isAdjacent, foundGears
 
 	}
 
 	var word string
 	var adjacent bool
+	var foundCoords = make(map[coords]struct{})
 
 	for y := 0; y < maxY; y++ {
 
 		word = ""
-		adjacent = false
+
+		//clear(foundCoords)
 
 		for x := 0; x < maxX; x++ {
 			if !unicode.IsDigit(rune(data[y][x])) {
@@ -99,6 +102,9 @@ func parseData(data []string) gears {
 					if value, err := strconv.Atoi(word); err == nil {
 						if adjacent {
 							result.adjacent = append(result.adjacent, value)
+							for thisCoord := range foundCoords {
+								result.gearCoords[thisCoord] = append(result.gearCoords[thisCoord], value)
+							}
 						} else {
 							result.nonadjacent = append(result.nonadjacent, value)
 						}
@@ -106,11 +112,21 @@ func parseData(data []string) gears {
 				}
 				word = ""
 				adjacent = false
+				//clear(foundCoords)
 				continue
 			} else {
 				word += string(data[y][x])
-				if !adjacent {
-					adjacent = checkAdjacent(y, x)
+				var check bool
+				var newCoords []coords
+				check, newCoords = checkAdjacent(y, x)
+
+				if check {
+					adjacent = check
+				}
+
+				for _, thisCoord := range newCoords {
+
+					foundCoords[thisCoord] = struct{}{}
 				}
 			}
 		}
