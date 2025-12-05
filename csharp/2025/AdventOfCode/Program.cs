@@ -1,6 +1,6 @@
-﻿using Day04;
+﻿using Day05;
 
-var day = new Day04Solution();
+var day = new Day05Solution();
 
 // run test input first
 Console.WriteLine("=== TEST ===");
